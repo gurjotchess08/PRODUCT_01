@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduConnect | University Study Portal</title>
+    <style>
+        :root {
+            --bg1: #667eea;
+            --bg2: #764ba2;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --student: #ec4899;
+            --student-dark: #db2777;
+            --surface: #f3f4f6;
+            --white: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.18);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+            min-height: 100vh;
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 30px 16px 60px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        header {
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 36px;
+        }
+
+        .brand {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        .login-section {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(280px, 1fr));
+            gap: 28px;
+            margin-bottom: 30px;
+        }
+
+        .login-box,
+        .features,
+        .departments {
+            background: var(--card);
+            border-radius: 18px;
+            box-shadow: 0 16px 40px var(--shadow);
+        }
+
+        .login-box {
+            padding: 28px 24px 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .login-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-icon {
+            font-size: 2.7rem;
+            margin-bottom: 10px;
+        }
+
+        .login-box h2 {
+            color: var(--primary);
+            font-size: clamp(1.5rem, 2vw, 2rem);
+            margin-bottom: 18px;
+        }
+
+        .student-box h2 {
+            color: var(--student-dark);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 0.95rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: #fff;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 13px 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            color: var(--white);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn-teacher {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.25);
+        }
+
+        .btn-student {
+            background: linear-gradient(135deg, var(--student), var(--student-dark));
+            box-shadow: 0 10px 20px rgba(236, 72, 153, 0.25);
+        }
+
+        .description {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .features, .departments {
+            padding: 28px 24px;
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 2vw, 2rem);
+            text-align: center;
+            margin-bottom: 22px;
+            color: var(--primary);
+        }
+
+        .features-grid,
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 12px;
+            padding: 22px 18px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .feature-card .icon {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 8px;
+            font-size: 1.12rem;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            font-size: 0.92rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .dept-card {
+            background: linear-gradient(135deg, var(--primary), var(--bg2));
+            color: var(--white);
+            border-radius: 12px;
+            padding: 26px 18px;
+            text-align: center;
+            box-shadow: 0 10px 18px rgba(79, 70, 229, 0.2);
+        }
+
+        .dept-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .dept-card p {
+            font-size: 0.96rem;
+            opacity: 0.95;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 12px 0;
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--white);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .login-section {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding-top: 18px;
+            }
+
+            .features, .departments, .login-box {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">📚 EduConnect</div>
+            <p class="tagline">University Study Portal for Students and Teachers</p>
+        </header>
+
+        <section class="login-section">
+            <div class="login-box teacher-box">
+                <div class="login-icon">👨‍🏫</div>
+                <h2>Teacher Login</h2>
+                <form id="teacherForm">
+                    <div class="form-group">
+                        <label for="teacherId">University ID</label>
+                        <input type="text" id="teacherId" placeholder="Enter teacher ID" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherPassword">Password</label>
+                        <input type="password" id="teacherPassword" placeholder="Enter password" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherDept">Department</label>
+                        <select id="teacherDept" required>
+                            <option value="">Select Department</option>
+                            <option value="BCA">BCA</option>
+                            <option value="B.Tech">B.Tech</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-teacher">Login as Teacher</button>
+                    <p class="description">Upload syllabus, notes, PDF files, and homework for students.</p>
+                </form>
+            </div>
+
+            <div class="login-box student-box">
+                <div class="login-icon">👨‍🎓</div>
+                <h2>Student Login</h2>
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label for="studentId">University ID</label>
+                        <input type="text" id="studentId" placeholder="Enter student ID" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="studentPassword">Password</label>
+                        <input type="password" id="studentPassword" placeholder="Enter password" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="studentDept">Department</label>
+                        <select id="studentDept" required>
+                            <option value="">Select Department</option>
+                            <option value="BCA">BCA</option>
+                            <option value="B.Tech">B.Tech</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-student">Login as Student</button>
+                    <p class="description">Download notes, check assignments, and access course materials.</p>
+                </form>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title">Platform Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">📄</div>
+                    <h3>Syllabus</h3>
+                    <p>Teachers can upload academic syllabus and course details.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📝</div>
+                    <h3>Homework</h3>
+                    <p>Assign tasks and upload homework papers quickly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📚</div>
+                    <h3>Notes & PDFs</h3>
+                    <p>Share class notes and study resources in PDF format.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔐</div>
+                    <h3>ID-Based Access</h3>
+                    <p>Only authorized student or teacher IDs can access the portal.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h3>Small-Scale Design</h3>
+                    <p>Made for one university and a few departments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🎯</div>
+                    <h3>Department Wise</h3>
+                    <p>Organized for departments like BCA and B.Tech.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="departments">
+            <h2 class="section-title">Departments</h2>
+            <div class="dept-grid">
+                <div class="dept-card">
+                    <h3>💻 BCA</h3>
+                    <p>Bachelor of Computer Applications</p>
+                </div>
+                <div class="dept-card">
+                    <h3>🔧 B.Tech</h3>
+                    <p>Bachelor of Technology</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 EduConnect | <a href="#">Privacy</a> | <a href="#">Contact</a></p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('teacherForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const teacherId = document.getElementById('teacherId').value.trim();
+            const dept = document.getElementById('teacherDept').value;
+            if (!teacherId || !dept) {
+                alert('Please fill all teacher details.');
+                return;
+            }
+            alert('Teacher login successful. This is a UI demo for the study portal.');
+            console.log('Teacher login demo:', { teacherId, dept });
+        });
+
+        document.getElementById('studentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const studentId = document.getElementById('studentId').value.trim();
+            const dept = document.getElementById('studentDept').value;
+            if (!studentId || !dept) {
+                alert('Please fill all student details.');
+                return;
+            }
+            alert('Student login successful. This is a UI demo for the study portal.');
+            console.log('Student login demo:', { studentId, dept });
+        });
+    </script>
+</body>
+</html>
