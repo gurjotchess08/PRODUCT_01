@@ -12,138 +12,47 @@
     --moss: #4c6b4f;
     --moss-dark: #3a5240;
   }
-
   * { box-sizing: border-box; }
-
   body {
-    margin: 0;
-    min-height: 100vh;
-    background: var(--paper);
-    color: var(--ink);
+    margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink);
     font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    padding: 48px 20px;
+    display: flex; justify-content: center; padding: 48px 20px;
   }
-
-  main {
-    width: 100%;
-    max-width: 640px;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 0 4px;
-  }
-
-  p.sub {
-    margin: 0 0 32px;
-    color: #6b6a5f;
-    font-size: 0.95rem;
-  }
-
+  main { width: 100%; max-width: 640px; }
+  h1 { font-size: 1.5rem; font-weight: 600; margin: 0 0 4px; }
+  p.sub { margin: 0 0 32px; color: #6b6a5f; font-size: 0.95rem; }
   form {
-    display: flex;
-    gap: 10px;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 28px;
+    display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap;
+    padding-bottom: 20px; border-bottom: 1px solid var(--line); margin-bottom: 28px;
   }
-
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex: 1 1 140px;
-  }
-
-  label {
-    font-size: 0.8rem;
-    color: #6b6a5f;
-  }
-
+  .field { display: flex; flex-direction: column; gap: 6px; flex: 1 1 140px; }
+  label { font-size: 0.8rem; color: #6b6a5f; }
   input {
-    padding: 9px 10px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: #fff;
-    font-size: 0.95rem;
-    color: var(--ink);
+    padding: 9px 10px; border: 1px solid var(--line); border-radius: 6px;
+    background: #fff; font-size: 0.95rem; color: var(--ink);
   }
-
-  input:focus {
-    outline: 2px solid var(--moss);
-    outline-offset: 1px;
-    border-color: var(--moss);
-  }
-
-  input:invalid:not(:placeholder-shown) {
-    border-color: #b3564f;
-  }
-
+  input:focus { outline: 2px solid var(--moss); outline-offset: 1px; border-color: var(--moss); }
   button.save {
-    flex: 0 0 auto;
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 6px;
-    background: var(--moss);
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.15s ease;
+    flex: 0 0 auto; width: 42px; height: 42px; border: none; border-radius: 6px;
+    background: var(--moss); color: #fff; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: background 0.15s ease;
   }
-
   button.save:hover { background: var(--moss-dark); }
-  button.save:active { transform: translateY(1px); }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.92rem;
-  }
-
-  thead th {
-    text-align: left;
-    font-weight: 600;
-    padding: 8px 10px;
-    border-bottom: 2px solid var(--ink);
-  }
-
-  tbody td {
-    padding: 9px 10px;
-    border-bottom: 1px solid var(--line);
-  }
-
+  button.save:disabled { opacity: 0.5; cursor: default; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  thead th { text-align: left; font-weight: 600; padding: 8px 10px; border-bottom: 2px solid var(--ink); }
+  tbody td { padding: 9px 10px; border-bottom: 1px solid var(--line); }
   tbody tr:hover { background: #eeece0; }
-
-  .empty-row td {
-    text-align: center;
-    color: #9a988c;
-    padding: 24px 10px;
-    font-style: italic;
-  }
-
-  .remove-btn {
-    border: none;
-    background: none;
-    color: #b3564f;
-    cursor: pointer;
-    font-size: 0.85rem;
-  }
-
+  .empty-row td { text-align: center; color: #9a988c; padding: 24px 10px; font-style: italic; }
+  .remove-btn { border: none; background: none; color: #b3564f; cursor: pointer; font-size: 0.85rem; }
   .remove-btn:hover { text-decoration: underline; }
+  .status { font-size: 0.85rem; color: #b3564f; margin: -20px 0 20px; min-height: 1em; }
 </style>
 </head>
 <body>
 <main>
   <h1>Add a record</h1>
-  <p class="sub">Fill in the fields and press save to add a row to the table.</p>
+  <p class="sub">Fill in the fields and press save to insert a row into the database.</p>
 
   <form id="entry-form">
     <div class="field">
@@ -158,7 +67,7 @@
       <label for="age">Age</label>
       <input type="number" id="age" placeholder="21" min="0" max="120" required>
     </div>
-    <button type="submit" class="save" title="Save" aria-label="Save entry">
+    <button type="submit" class="save" id="save-btn" title="Save" aria-label="Save entry">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"></path>
         <path d="M17 21v-8H7v8"></path>
@@ -166,20 +75,14 @@
       </svg>
     </button>
   </form>
+  <p class="status" id="status"></p>
 
   <table>
     <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Age</th>
-        <th></th>
-      </tr>
+      <tr><th>Name</th><th>Email</th><th>Age</th><th></th></tr>
     </thead>
     <tbody id="records-body">
-      <tr class="empty-row" id="empty-row">
-        <td colspan="4">No records yet</td>
-      </tr>
+      <tr class="empty-row" id="empty-row"><td colspan="4">Loading…</td></tr>
     </tbody>
   </table>
 </main>
@@ -187,41 +90,94 @@
 <script>
   const form = document.getElementById('entry-form');
   const tbody = document.getElementById('records-body');
-  const emptyRow = document.getElementById('empty-row');
+  const saveBtn = document.getElementById('save-btn');
+  const statusEl = document.getElementById('status');
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const age = document.getElementById('age').value.trim();
-
-    if (!name || !email || !age) return;
-
-    if (emptyRow.parentNode) emptyRow.remove();
-
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${escapeHtml(name)}</td>
-      <td>${escapeHtml(email)}</td>
-      <td>${escapeHtml(age)}</td>
-      <td><button class="remove-btn" type="button">remove</button></td>
-    `;
-    row.querySelector('.remove-btn').addEventListener('click', function () {
-      row.remove();
-      if (!tbody.children.length) tbody.appendChild(emptyRow);
-    });
-
-    tbody.appendChild(row);
-    form.reset();
-    document.getElementById('name').focus();
-  });
+  function showStatus(msg) {
+    statusEl.textContent = msg || '';
+  }
 
   function escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
   }
+
+  function renderRows(records) {
+    tbody.innerHTML = '';
+    if (!records.length) {
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="4">No records yet</td></tr>';
+      return;
+    }
+    records.forEach(function (r) {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${escapeHtml(r.name)}</td>
+        <td>${escapeHtml(r.email)}</td>
+        <td>${escapeHtml(String(r.age))}</td>
+        <td><button class="remove-btn" type="button" data-id="${r.id}">remove</button></td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  // GET: load existing records when the page opens
+  async function loadRecords() {
+    try {
+      const res = await fetch('/api/records');
+      if (!res.ok) throw new Error('Failed to load');
+      const data = await res.json();
+      renderRows(data);
+    } catch (err) {
+      showStatus('Could not load records — is the Flask server running?');
+    }
+  }
+
+  // POST: send the form to the server, then reload the table
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    showStatus('');
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const age = document.getElementById('age').value.trim();
+    if (!name || !email || !age) return;
+
+    saveBtn.disabled = true;
+    try {
+      const res = await fetch('/api/records', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, age: Number(age) })
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Save failed');
+      }
+      form.reset();
+      document.getElementById('name').focus();
+      await loadRecords();
+    } catch (err) {
+      showStatus(err.message);
+    } finally {
+      saveBtn.disabled = false;
+    }
+  });
+
+  // DELETE: remove a row when its remove link is clicked
+  tbody.addEventListener('click', async function (e) {
+    if (!e.target.classList.contains('remove-btn')) return;
+    const id = e.target.dataset.id;
+    try {
+      const res = await fetch('/api/records/' + id, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Delete failed');
+      await loadRecords();
+    } catch (err) {
+      showStatus(err.message);
+    }
+  });
+
+  loadRecords();
 </script>
 </body>
 </html>
